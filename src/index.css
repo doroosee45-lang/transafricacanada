@@ -1,0 +1,211 @@
+@import '@tabler/icons-webfont/dist/tabler-icons.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global mobile resets ── */
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  overflow-x: hidden;
+  min-width: 0;
+}
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Touch-friendly tap targets ── */
+@media (max-width: 639px) {
+  button,
+  a {
+    min-height: 36px;
+  }
+}
+
+/* ── App page content padding responsive ── */
+@media (max-width: 1023px) {
+  .page-content { padding: 24px 16px 40px !important; }
+}
+
+@media (max-width: 639px) {
+  .page-content { padding: 16px 12px 32px !important; }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE KPI / STAT-CARD GRIDS
+   PC ≥1024px : colonnes naturelles
+   Tablette ≤1023px : 2 colonnes
+   Mobile ≤639px  : 2 colonnes (cards) / 1 col (filtres)
+═══════════════════════════════════════════ */
+
+/* — 4 colonnes → 2 — */
+@media (max-width: 1023px) {
+  .grid-kpi-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  /* — 3 colonnes → 2 — */
+  .grid-kpi-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  /* — 5 colonnes → 3 — */
+  .grid-kpi-5 {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+  }
+  /* — filtres 4 colonnes → 2 — */
+  .grid-filters-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+}
+
+@media (max-width: 639px) {
+  /* Cards : 2 colonnes sur mobile (confort de lecture) */
+  .grid-kpi-4,
+  .grid-kpi-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .grid-kpi-5 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  /* Filtres : 1 colonne sur mobile (champs pleine largeur) */
+  .grid-filters-4 {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   FORM PAGES — responsive layout
+══════════════════════════════════════════ */
+
+/* Sidebar + form : sidebar disparaît sur tablette/mobile */
+@media (max-width: 1023px) {
+  .form-layout-sidebar {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .form-sidebar {
+    display: none !important;
+  }
+  .form-card-body {
+    padding: 24px 20px !important;
+  }
+  .form-stepper-header {
+    padding: 20px !important;
+  }
+}
+
+/* Petits écrans (≤639px) */
+@media (max-width: 639px) {
+  /* Champs 2-col → 1-col */
+  .form-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  /* Padding intérieur compact */
+  .form-card-body {
+    padding: 18px 14px !important;
+  }
+  .form-stepper-header {
+    padding: 14px !important;
+  }
+  /* Boutons action : pleine largeur empilés */
+  .form-actions {
+    flex-direction: column-reverse !important;
+    gap: 10px !important;
+  }
+  .form-actions > button,
+  .form-actions > a {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  /* Photos : 3 cols au lieu de 5 */
+  .form-photos-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   SETTINGS — sidebar → onglets horizontaux
+══════════════════════════════════════════ */
+@media (max-width: 1023px) {
+  .settings-layout {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .settings-sidebar {
+    width: 100% !important;
+    flex-shrink: unset !important;
+  }
+  .settings-sidebar > div {
+    position: static !important;
+  }
+  .settings-nav {
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    padding: 8px !important;
+    gap: 6px !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  .settings-nav::-webkit-scrollbar { display: none; }
+  .settings-nav-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 10px 14px !important;
+    min-width: 0 !important;
+  }
+  .settings-nav-desc { display: none !important; }
+  .settings-save {
+    justify-content: stretch !important;
+  }
+  .settings-save > button {
+    width: 100% !important;
+  }
+  .settings-security-2fa {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   REPORTS — grille principale responsive
+══════════════════════════════════════════ */
+@media (max-width: 1023px) {
+  .reports-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   ANALYTICS — sections empilées sur mobile
+══════════════════════════════════════════ */
+
+/* Graphiques 2-col → 1-col sur mobile */
+@media (max-width: 767px) {
+  .grid-analytics-charts {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+/* Indicateurs 3-col → 1-col dès tablette portrait */
+@media (max-width: 1023px) {
+  .grid-analytics-bottom {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}

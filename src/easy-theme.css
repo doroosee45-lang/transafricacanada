@@ -1,0 +1,148 @@
+/* EASY — adaptation originale de la direction visuelle easy-shipway.com.
+   Couleurs des erreurs/succès conservées ; aucune règle ne masque les contenus. */
+:root {
+  --easy-gold: #c7983a;
+  --easy-action: #a77b28;
+  --easy-ink: #171614;
+  --easy-cream: #fdf0e2;
+  --easy-surface: #faf8f5;
+  --easy-border: #e9e1d5;
+  --toastify-color-info: #a77b28;
+  --toastify-font-family: 'Open Sans', Arial, sans-serif;
+}
+body { font-family: 'Open Sans', Arial, sans-serif; background: var(--easy-surface); }
+button, input, select, textarea { font-family: inherit; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: rgba(199,152,58,.15); }
+button, input, select, textarea { transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease; }
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid #8a6520;
+  outline-offset: 3px;
+}
+input:not([type=checkbox]):not([type=radio]):focus,
+select:focus, textarea:focus {
+  border-color: var(--easy-gold) !important;
+  box-shadow: 0 0 0 3px rgba(199,152,58,.16);
+}
+input[type=checkbox], input[type=radio] { accent-color: var(--easy-action); }
+::selection { background: #f0dbb3; color: #171614; }
+/* La navigation flottante conserve son menu et son comportement mobile. */
+.easy-public-nav {
+  top: 12px !important; left: 16px !important; right: 16px !important;
+  border-radius: 18px;
+  background: rgba(255,255,255,.94) !important;
+  border: 1px solid rgba(233,225,213,.85);
+  box-shadow: 0 6px 24px rgba(23,22,20,.08);
+  backdrop-filter: blur(14px);
+}
+.easy-public-nav a:not([class*='bg-gradient']) { color: #37312a !important; }
+.easy-public-nav a:not([class*='bg-gradient']):hover { color: #8a6520 !important; }
+.easy-public-nav button { color: #37312a !important; }
+/* Les données et actions restent identiques : changement de cadre seulement. */
+.page-content { background-color: var(--easy-surface); }
+@media (max-width: 639px) {
+  .easy-public-nav { top: 8px !important; left: 8px !important; right: 8px !important; border-radius: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+@media print {
+  body { background: white; }
+  .easy-public-nav { position: static !important; box-shadow: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+/* Le libellé de marque conserve un contraste lisible dans la barre claire. */
+.easy-public-nav a > span { color: #171614 !important; }
+.easy-public-nav a > div > span { color: #fff; }
+
+/* Fonds neutres exclusivement dans les pages internes. */
+.easy-internal, .easy-internal main, .easy-internal main > div { background: #fff !important; }
+.easy-internal-header { background: #fff !important; background-image: none !important; color: #171614 !important; box-shadow: none !important; border-radius: 0 !important; }
+.easy-internal-header h1, .easy-internal-header h2,
+.easy-internal-header h1 span, .easy-internal-header h2 span {
+  color: #171614 !important; background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+.easy-internal-header p { color: #59534b !important; }
+.easy-internal-header button[style*="rgba(255"], .easy-internal-header a[style*="rgba(255"] {
+  background: #fff !important; color: #37312a !important; border-color: #d6d0c6 !important;
+}
+.easy-internal-header button[style*="rgba(255"] svg, .easy-internal-header a[style*="rgba(255"] svg { color: #37312a !important; }
+
+
+/* EASY GLOBAL SPACING PATCH START */
+@media screen {
+  .easy-app-content {
+    min-width: 0;
+  }
+
+  .easy-app-content .easy-internal-header {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 24px 20px !important;
+    margin-top: 0 !important;
+    margin-bottom: 16px !important;
+    border-radius: 14px !important;
+    overflow: visible !important;
+  }
+
+  .easy-app-content .easy-internal-header > div {
+    max-width: 100% !important;
+  }
+
+  .easy-app-content .easy-internal-header > div > div:first-child {
+    margin-bottom: 8px !important;
+  }
+
+  .easy-app-content .easy-internal-header h1 {
+    font-size: clamp(24px, 3vw, 34px) !important;
+    line-height: 1.2 !important;
+    margin: 8px 0 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .easy-app-content .easy-internal-header h2 {
+    line-height: 1.3 !important;
+    margin: 8px 0 !important;
+  }
+
+  .easy-app-content .easy-internal-header p {
+    margin-top: 6px !important;
+    margin-bottom: 8px !important;
+    line-height: 1.5 !important;
+  }
+
+  .easy-app-content .easy-internal-header + div {
+    margin-top: 0 !important;
+    padding-top: 20px !important;
+  }
+
+  .easy-app-content .easy-internal-header button svg {
+    color: currentColor !important;
+  }
+
+  .easy-app-content .pd-hero-pill {
+    margin-bottom: 0 !important;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .easy-app-content .easy-internal-header {
+    padding: 18px 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .easy-app-content .easy-internal-header > div {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .easy-app-content .easy-internal-header + div {
+    padding-top: 14px !important;
+  }
+
+  .easy-app-content .easy-internal-header h1 {
+    font-size: 25px !important;
+  }
+}
+/* EASY GLOBAL SPACING PATCH END */

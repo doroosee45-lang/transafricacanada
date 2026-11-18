@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="EASY — Plateforme de gestion logistique et d'expédition de colis" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!-- Tabler icons via node_modules (plus de CDN externe) -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/tabler-icons.min.css" />
+    <title>EASY</title>
+  </head>
+  <body>
+    <noscript>Notre Agence d'expédition de colis</noscript>
+    <div id="root"></div>
+  </body>
+</html>
