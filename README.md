@@ -1,8 +1,8 @@
-# EASY — React + Vite
+# Trans Africa Canada — React + Vite
 
 Frontend React 18, Vite 6, Tailwind 3, React Router 7.
 
-Voir ../DEMARRAGE-EASY.md et ../RAPPORT-MIGRATION-VITE.md.
+Voir ../DEMARRAGE-Trans Africa Canada.md et ../RAPPORT-MIGRATION-VITE.md.
 
 - Installation : npm ci
 - Developpement : npm run dev (port 3000)
