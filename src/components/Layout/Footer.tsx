@@ -4,6 +4,10 @@ import { Truck, Mail, Phone, MapPin, ChevronRight, Send, CheckCircle, Shield, Be
 import api from '../../api/axios';
 import { asHttpError } from '../../types/api';
 
+// Pied de page sur fond bleu nuit (#172F50) : textes clairs de la palette officielle.
+const FOOTER_TEXT = '#C5DCEF';
+const FOOTER_TITLE = '#FFFFFF';
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState('');
@@ -95,7 +99,7 @@ const Footer = () => {
   return (
     <footer
       className="relative overflow-hidden"
-      style={{ background: 'var(--bg-800)', borderTop: '1px solid rgba(121,181,232,0.12)' }}
+      style={{ background: '#172F50', borderTop: '1px solid rgba(121,181,232,0.12)' }}
     >
       {/* Ambient glows */}
       <div className="absolute top-0 left-1/4 w-80 h-80 rounded-full blur-3xl pointer-events-none"
@@ -114,25 +118,25 @@ const Footer = () => {
       <div className="relative w-full h-px"
         style={{ background: 'linear-gradient(90deg, transparent, rgba(121,181,232,0.4), transparent)' }} />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-10 sm:pt-12 pb-6">
 
-        {/* ── Main grid ──────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
+        {/* ── Main grid : marque · liens · légal · newsletter & réseaux ── */}
+        <div className="grid grid-cols-2 lg:grid-cols-12 gap-x-6 gap-y-8 lg:gap-10 mb-8">
 
           {/* Brand column */}
-          <div className="lg:col-span-3">
+          <div className="col-span-2 lg:col-span-4">
             {/* Logo */}
             <div className="flex items-center gap-3 mb-5 group">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-105"
-                style={{ background: 'linear-gradient(135deg, #4D91D9, #4D91D9)', boxShadow: '0 0 16px rgba(121,181,232,0.3)' }}>
+                style={{ background: '#4D91D9', boxShadow: '0 0 16px rgba(121,181,232,0.3)' }}>
                 <Truck size={18} className="text-white" />
               </div>
-              <span className="text-xl font-bold" style={{ fontFamily: 'Sora, sans-serif' }}>
+              <span className="text-xl font-bold text-white" style={{ fontFamily: 'Sora, sans-serif' }}>
                 Trans Africa Canada
               </span>
             </div>
 
-            <p className="text-sm leading-relaxed mb-5" style={{ color: '#64748b' }}>
+            <p className="text-sm leading-relaxed mb-5" style={{ color: FOOTER_TEXT }}>
               La plateforme logistique nouvelle génération qui connecte expéditeurs, transporteurs et destinataires pour une gestion optimale de vos envois.
             </p>
 
@@ -145,18 +149,18 @@ const Footer = () => {
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2.5 group">
                   <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200"
-                    style={{ background: 'rgba(121,181,232,0.08)', border: '1px solid rgba(121,181,232,0.15)' }}>
+                    style={{ background: 'rgba(121,181,232,0.12)', border: '1px solid rgba(121,181,232,0.25)' }}>
                     <item.icon size={13} style={{ color: '#79B5E8' }} />
                   </div>
                   {item.href ? (
                     <a href={item.href} className="text-sm transition-colors duration-200"
-                      style={{ color: '#64748b' }}
-                      onMouseEnter={e => (e.target as HTMLElement).style.color = '#94a3b8'}
-                      onMouseLeave={e => (e.target as HTMLElement).style.color = '#64748b'}>
+                      style={{ color: FOOTER_TEXT }}
+                      onMouseEnter={e => (e.target as HTMLElement).style.color = '#FFFFFF'}
+                      onMouseLeave={e => (e.target as HTMLElement).style.color = FOOTER_TEXT}>
                       {item.text}
                     </a>
                   ) : (
-                    <span className="text-sm" style={{ color: '#64748b' }}>{item.text}</span>
+                    <span className="text-sm" style={{ color: FOOTER_TEXT }}>{item.text}</span>
                   )}
                 </div>
               ))}
@@ -164,9 +168,9 @@ const Footer = () => {
           </div>
 
           {/* Quick links */}
-          <div className="lg:col-span-2">
+          <div className="col-span-1 lg:col-span-2">
             <h3 className="text-xs font-bold uppercase tracking-widest mb-5"
-              style={{ fontFamily: 'Sora, sans-serif', color: '#475569' }}>
+              style={{ fontFamily: 'Sora, sans-serif', color: FOOTER_TITLE }}>
               Liens rapides
             </h3>
             <ul className="space-y-2.5">
@@ -174,9 +178,9 @@ const Footer = () => {
                 <li key={i}>
                   <Link to={link.href}
                     className="flex items-center gap-1.5 text-sm transition-all duration-200 group"
-                    style={{ color: '#64748b' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.paddingLeft = '4px'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#64748b'; e.currentTarget.style.paddingLeft = '0'; }}>
+                    style={{ color: FOOTER_TEXT }}
+                    onMouseEnter={e => { e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.paddingLeft = '4px'; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = FOOTER_TEXT; e.currentTarget.style.paddingLeft = '0'; }}>
                     <ChevronRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" style={{ color: '#79B5E8' }} />
                     {link.name}
                   </Link>
@@ -186,9 +190,9 @@ const Footer = () => {
           </div>
 
           {/* Legal links */}
-          <div className="lg:col-span-2">
+          <div className="col-span-1 lg:col-span-2">
             <h3 className="text-xs font-bold uppercase tracking-widest mb-5"
-              style={{ fontFamily: 'Sora, sans-serif', color: '#475569' }}>
+              style={{ fontFamily: 'Sora, sans-serif', color: FOOTER_TITLE }}>
               Informations légales
             </h3>
             <ul className="space-y-2.5">
@@ -196,9 +200,9 @@ const Footer = () => {
                 <li key={i}>
                   <Link to={link.href}
                     className="flex items-center gap-1.5 text-sm transition-all duration-200 group"
-                    style={{ color: '#64748b' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.paddingLeft = '4px'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#64748b'; e.currentTarget.style.paddingLeft = '0'; }}>
+                    style={{ color: FOOTER_TEXT }}
+                    onMouseEnter={e => { e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.paddingLeft = '4px'; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = FOOTER_TEXT; e.currentTarget.style.paddingLeft = '0'; }}>
                     <ChevronRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" style={{ color: '#79B5E8' }} />
                     {link.name}
                   </Link>
@@ -207,85 +211,76 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Gallery */}
-          
-        </div>
-
-        {/* ── Newsletter & Social ──────────────────────────────────── */}
-        <div className="mb-8 rounded-2xl p-6"
-          style={{ background: 'rgba(121,181,232,0.04)', border: '1px solid rgba(121,181,232,0.1)' }}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-            {/* Newsletter */}
-            <div>
-              <h4 className="font-semibold text-white mb-1 text-sm" style={{ fontFamily: 'Sora, sans-serif' }}>
-                Restez informé
-              </h4>
-              <p className="text-xs mb-3" style={{ color: '#64748b' }}>
-                Recevez nos dernières actualités et offres exclusives
-              </p>
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  placeholder="votre@email.com"
-                  className="flex-1 px-4 py-2.5 text-sm rounded-xl outline-none transition-all duration-200"
-                  style={{
-                    background: 'rgba(23,47,80,0.8)',
-                    border: '1px solid rgba(121,181,232,0.2)',
-                    color: '#e2e8f0',
-                    fontFamily: 'DM Sans, sans-serif',
-                  }}
-                  onFocus={e => (e.target as HTMLElement).style.borderColor = 'rgba(121,181,232,0.5)'}
-                  onBlur={e => (e.target as HTMLElement).style.borderColor = 'rgba(121,181,232,0.2)'}
-                />
-                <button type="submit" disabled={sending} aria-label="S'inscrire à la newsletter"
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-60"
-                  style={{
-                    background: subscribed ? 'linear-gradient(135deg,#10b981,#059669)' : '#347FC5',
-                    boxShadow: subscribed ? '0 4px 16px rgba(16,185,129,0.3)' : '0 4px 16px rgba(121,181,232,0.25)',
-                    fontFamily: 'Sora, sans-serif',
-                    minWidth: '80px',
-                  }}>
-                  {subscribed ? (
-                    <><CheckCircle size={14} />Merci !</>
-                  ) : (
-                    <><Send size={14} /> {sending ? 'Envoi…' : "S'inscrire"}</>
-                  )}
-                </button>
-              </form>
-              {subError && <p className="text-xs mt-2" role="alert" style={{ color: '#fca5a5' }}>{subError}</p>}
-            </div>
+          {/* Newsletter & réseaux sociaux (à la place de l'ancienne galerie d'images) */}
+          <div className="col-span-2 lg:col-span-4">
+            <h3 className="text-xs font-bold uppercase tracking-widest mb-5"
+              style={{ fontFamily: 'Sora, sans-serif', color: FOOTER_TITLE }}>
+              Restez informé
+            </h3>
+            <p className="text-sm mb-3" style={{ color: FOOTER_TEXT }}>
+              Recevez nos dernières actualités et offres exclusives
+            </p>
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="votre@email.com"
+                aria-label="Votre adresse e-mail"
+                className="flex-1 min-w-0 px-4 py-2.5 text-sm rounded-xl outline-none transition-all duration-200 placeholder:text-[#8295A8]"
+                style={{
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(121,181,232,0.3)',
+                  color: '#FFFFFF',
+                  fontFamily: 'DM Sans, sans-serif',
+                }}
+                onFocus={e => (e.target as HTMLElement).style.borderColor = 'rgba(121,181,232,0.7)'}
+                onBlur={e => (e.target as HTMLElement).style.borderColor = 'rgba(121,181,232,0.3)'}
+              />
+              <button type="submit" disabled={sending} aria-label="S'inscrire à la newsletter"
+                className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-60"
+                style={{
+                  background: subscribed ? 'linear-gradient(135deg,#10b981,#059669)' : '#347FC5',
+                  boxShadow: subscribed ? '0 4px 16px rgba(16,185,129,0.3)' : '0 4px 16px rgba(121,181,232,0.25)',
+                  fontFamily: 'Sora, sans-serif',
+                  minWidth: '80px',
+                }}>
+                {subscribed ? (
+                  <><CheckCircle size={14} />Merci !</>
+                ) : (
+                  <><Send size={14} /> {sending ? 'Envoi…' : "S'inscrire"}</>
+                )}
+              </button>
+            </form>
+            {subError && <p className="text-xs mt-2" role="alert" style={{ color: '#fca5a5' }}>{subError}</p>}
 
             {/* Social */}
-            <div className="flex flex-col lg:items-end">
-              <h4 className="font-semibold text-white mb-3 text-sm" style={{ fontFamily: 'Sora, sans-serif' }}>
-                Suivez-nous
-              </h4>
-              <div className="flex gap-2.5">
-                {socialLinks.map((s, i) => (
-                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
-                    aria-label={s.name}
-                    className="relative w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:-translate-y-1 group"
-                    style={{ background: 'rgba(121,181,232,0.08)', border: '1px solid rgba(121,181,232,0.15)', color: '#64748b' }}
-                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(121,181,232,0.18)'; e.currentTarget.style.borderColor = 'rgba(121,181,232,0.4)'; e.currentTarget.style.color = '#79B5E8'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(121,181,232,0.2)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(121,181,232,0.08)'; e.currentTarget.style.borderColor = 'rgba(121,181,232,0.15)'; e.currentTarget.style.color = '#64748b'; e.currentTarget.style.boxShadow = 'none'; }}>
-                    {s.icon}
-                    <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs py-1 px-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
-                      style={{ background: 'rgba(23,47,80,0.95)', color: '#94a3b8', border: '1px solid rgba(121,181,232,0.2)' }}>
-                      {s.name}
-                    </span>
-                  </a>
-                ))}
-              </div>
+            <h4 className="font-semibold text-white mt-6 mb-3 text-sm" style={{ fontFamily: 'Sora, sans-serif' }}>
+              Suivez-nous
+            </h4>
+            <div className="flex gap-2.5">
+              {socialLinks.map((s, i) => (
+                <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
+                  aria-label={s.name}
+                  className="relative w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:-translate-y-1 group"
+                  style={{ background: 'rgba(121,181,232,0.12)', border: '1px solid rgba(121,181,232,0.25)', color: FOOTER_TEXT }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(121,181,232,0.25)'; e.currentTarget.style.borderColor = 'rgba(121,181,232,0.5)'; e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(121,181,232,0.2)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(121,181,232,0.12)'; e.currentTarget.style.borderColor = 'rgba(121,181,232,0.25)'; e.currentTarget.style.color = FOOTER_TEXT; e.currentTarget.style.boxShadow = 'none'; }}>
+                  {s.icon}
+                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs py-1 px-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
+                    style={{ background: '#FFFFFF', color: '#172F50', border: '1px solid #C5DCEF' }}>
+                    {s.name}
+                  </span>
+                </a>
+              ))}
             </div>
           </div>
         </div>
 
         {/* ── Bottom bar ──────────────────────────────────────────── */}
-        <div className="pt-6 flex flex-col items-center md:flex-row md:justify-between gap-3 text-center"
-          style={{ borderTop: '1px solid rgba(121,181,232,0.08)' }}>
-          <p className="text-xs" style={{ color: '#475569', fontFamily: 'JetBrains Mono, monospace' }}>
+        <div className="pt-5 flex flex-col items-center md:flex-row md:justify-between gap-3 text-center"
+          style={{ borderTop: '1px solid rgba(121,181,232,0.2)' }}>
+          <p className="text-xs" style={{ color: FOOTER_TEXT, fontFamily: 'JetBrains Mono, monospace' }}>
             © {currentYear} Trans Africa Canada.
             <span className="mx-2" style={{ color: '#172F50' }}></span>
             Tous droits réservés.
@@ -294,11 +289,11 @@ const Footer = () => {
 
           <div className="flex items-center flex-wrap justify-center gap-3 sm:gap-5">
             {[
-              { icon: CheckCircle, label: 'Certifié', color: '#10b981' },
+              { icon: CheckCircle, label: 'Certifié', color: '#79B5E8' },
               { icon: Bell, label: 'Support 24/7', color: '#79B5E8' },
-              { icon: Shield, label: 'Paiement sécurisé', color: '#8b5cf6' },
+              { icon: Shield, label: 'Paiement sécurisé', color: '#79B5E8' },
             ].map((badge, i) => (
-              <div key={i} className="flex items-center gap-1.5 text-xs" style={{ color: '#475569' }}>
+              <div key={i} className="flex items-center gap-1.5 text-xs" style={{ color: FOOTER_TEXT }}>
                 <badge.icon size={14} style={{ color: badge.color }} />
                 <span>{badge.label}</span>
               </div>
