@@ -1,0 +1,11 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {createSyncEngine} from '../src/sync/engine';
+import type {QueueItem, QueueStore} from '../src/sync/types';
+function item(id:string,userId='u1'):QueueItem{return {id,userId,type:'scan',reference:'r',createdAt:'2026-01-01',idempotencyKey:'key-'+id,status:'pending',payload:{}};}
+function store(items:QueueItem[]):QueueStore {return {list:async()=>items, setResult:async(id,user,status,message)=>{const found=items.find(i=>i.id===id&&i.userId===user);if(found){found.status=status;found.serverMessage=message;}}};}
+test('la file traite uniquement le compte courant et conserve les clés',async()=>{const items=[item('1'),item('2','autre')];const keys:string[]=[];const engine=createSyncEngine(store(items),async i=>{keys.push(i.idempotencyKey);return {kind:'accepted'};});assert.deepEqual(await engine.synchronize('u1',async()=>true),{started:true,processed:1});assert.deepEqual(keys,['key-1']);assert.equal(items[1].status,'pending');});
+test('rejet et conflit restent identifiables',async()=>{const items=[item('1'),item('2')];const engine=createSyncEngine(store(items),async i=>i.id==='1'?{kind:'rejected',message:'Refus'}:{kind:'conflict',message:'Conflit'});await engine.synchronize('u1',async()=>true);assert.equal(items[0].status,'rejected');assert.equal(items[1].status,'conflict');assert.equal(items[1].serverMessage,'Conflit');});
+test('une panne ne confirme ni ne modifie les opérations',async()=>{const items=[item('1')];const engine=createSyncEngine(store(items),async()=>{throw Error('offline')});await engine.synchronize('u1',async()=>true);assert.equal(items[0].status,'pending');});
+test('session expirée stoppe les envois',async()=>{let calls=0;const engine=createSyncEngine(store([item('1')]),async()=>{calls++;return {kind:'accepted'};});await engine.synchronize('u1',async()=>false);assert.equal(calls,0);});
+test('un second lancement ne double pas les envois concurrents',async()=>{let release!:()=>void;const wait=new Promise<void>(resolve=>{release=resolve});const engine=createSyncEngine(store([item('1')]),async()=>{await wait;return {kind:'accepted'};});const first=engine.synchronize('u1',async()=>true);assert.equal((await engine.synchronize('u1',async()=>true)).started,false);release();assert.equal((await first).processed,1);});

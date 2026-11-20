@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "name": "Trans Africa Canada",
+    "slug": "trans-africa-canada-mobile",
+    "scheme": "transafricacanada",
+    "version": "0.1.0",
+    "orientation": "default",
+    "icon": "./Assets/icon.png",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#FFFFFF",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.transafrica.canada",
+      "icon": "./Assets/icon.png"
+    },
+    "android": {
+      "package": "com.transafrica.canada",
+      "adaptiveIcon": {
+        "foregroundImage": "./Assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./Assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-asset",
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Autoriser $(PRODUCT_NAME) à utiliser la caméra pour lire les QR codes.",
+          "recordAudioAndroid": false
+        }
+      ],
+      [
+        "expo-sqlite",
+        {
+          "useSQLCipher": true
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./Assets/splash-icon.png",
+          "imageWidth": 220,
+          "resizeMode": "contain",
+          "backgroundColor": "#FFFFFF"
+        }
+      ],
+      "expo-font"
+    ]
+  }
+}

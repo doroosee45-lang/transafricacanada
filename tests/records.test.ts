@@ -1,0 +1,3 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {isRecordKind,uniqueRecords} from '../src/features/records/model';
+test('filtrage strict des rubriques',()=>{assert.equal(isRecordKind('payments'),true);assert.equal(isRecordKind('__proto__'),false);assert.equal(isRecordKind(['payments']),false);});
+test('pagination sans doublon, conserve les informations existantes',()=>{const current=[{id:'1',title:'a'}];const result=uniqueRecords(current,[{id:'1',title:'b'},{id:'2',title:'c'},{id:'2',title:'d'}]);assert.deepEqual(result.map(i=>i.title),['a','c']);assert.equal(current.length,1);});
